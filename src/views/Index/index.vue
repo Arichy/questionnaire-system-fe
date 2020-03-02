@@ -1,5 +1,5 @@
 <script>
-import { Layout, Menu, Icon } from "ant-design-vue";
+import { Layout, Menu, Icon, Dropdown } from "ant-design-vue";
 import { siderMenuConfig } from "./config";
 import IO from "./api";
 
@@ -62,6 +62,10 @@ export default {
       );
       return [target.key];
     },
+    logout() {
+      sessionStorage.removeItem("token");
+      this.$router.push("/login");
+    },
   },
 
   render(h) {
@@ -72,7 +76,22 @@ export default {
         <Header>
           <div class="header">
             <div class="title">毕设：调查问卷系统</div>
-            <div class="current-user">当前用户: {userInfo.username}</div>
+
+            <div class="current-user">
+              <Dropdown
+                overlay={
+                  <Menu>
+                    <MenuItem>
+                      <a onClick={this.logout} style={{ color: "#f5222d" }}>
+                        退出登录
+                      </a>
+                    </MenuItem>
+                  </Menu>
+                }
+              >
+                <span>当前用户: {userInfo.username}</span>
+              </Dropdown>
+            </div>
           </div>
         </Header>
         <Layout>
@@ -128,10 +147,11 @@ export default {
     color: white;
 
     .title {
-      font-size: 30px;
+      font-size: 25px;
     }
     .current-user {
-      font-size: 20px;
+      font-size: 17px;
+      cursor: pointer;
     }
   }
 

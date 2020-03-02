@@ -79,6 +79,7 @@ export default {
         pageSize: PAGE_SIZE,
         total: 0,
         current: 1,
+        showTotal: total => `共 ${total} 个`,
       },
     };
   },

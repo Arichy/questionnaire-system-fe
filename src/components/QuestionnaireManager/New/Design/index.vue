@@ -3,16 +3,6 @@
     <Input addonBefore="问卷标题" v-model="questionnaire.title" />
     <Divider :dashed="true" />
     <div>
-      <!-- <Select class="select" placeholder="请选择问题类型">
-        <Option
-          v-for="item of questionTypes"
-          :key="item.label"
-          :value="item.value"
-          >{{ item.label }}</Option
-        >
-      </Select> -->
-
-      <!-- <Select class="select" placeholder="请选择最多可选项数"></Select> -->
       <div class="btn-group">
         <Button
           class="btn-item btn-add-question"

@@ -42,10 +42,6 @@ export default {
     };
   },
 
-  mounted() {
-    this.questionnare = require("./mock").default;
-  },
-
   methods: {
     handleChange({ value, key, index }) {
       const {
