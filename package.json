@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "cloc": "cloc . --exclude-list-file=.clocignore"
+    "cloc": "cloc . --exclude-list-file=.clocignore",
+    "sme": "source-map-explorer ./dist/js/chunk-vendors*"
   },
   "dependencies": {
     "ant-design-vue": "^1.4.11",
