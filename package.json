@@ -7,7 +7,9 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "cloc": "cloc . --exclude-list-file=.clocignore",
-    "sme": "source-map-explorer ./dist/js/chunk-vendors*"
+    "sme": "source-map-explorer ./dist/js/chunk-vendors*",
+    "deploy": "bash src/scripts/deploy.sh",
+    "send": "scp -r ./dist/* root@60.205.179.88:/webdata/questionnaire_system/client"
   },
   "dependencies": {
     "ant-design-vue": "^1.4.11",

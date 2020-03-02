@@ -1,10 +1,10 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
-// import echarts from "echarts";
-import echarts from "echarts/lib/echarts";
-import "echarts/lib/chart/pie";
-import "echarts/lib/component/tooltip";
-import "echarts/lib/component/title";
-import "echarts/lib/component/legend";
+import echarts from "echarts";
+// import echarts from "echarts/lib/echarts";
+// import "echarts/lib/chart/pie";
+// import "echarts/lib/component/tooltip";
+// import "echarts/lib/component/title";
+// import "echarts/lib/component/legend";
 
 @Component
 export default class PieChart extends Vue {
