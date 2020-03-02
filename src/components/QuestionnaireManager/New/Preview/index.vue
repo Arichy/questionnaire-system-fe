@@ -8,6 +8,8 @@ import { SINGLE_CHOICE, MULTIPLE_CHOICE, STATUS } from "@/common/const";
 
 import { includes } from "lodash-es";
 
+import e from "@/utils/event";
+
 export default {
   name: "preview",
   props: ["questionnaire", "isPreview", "errQuestionIdArr", "status"],
@@ -15,6 +17,7 @@ export default {
     return {
       form: {},
       previewValue: [],
+      forceDisabled: false,
     };
   },
 
@@ -28,6 +31,16 @@ export default {
       }
     },
   },
+  mounted() {
+    e.on("submit", () => {
+      console.log("submit");
+      this.forceDisabled = true;
+    });
+  },
+
+  beforeDestroy() {
+    e.off("submit");
+  },
 
   render(h) {
     const {
@@ -40,10 +53,31 @@ export default {
     } = this;
 
     return (
-      <Card class="preview-area" title={isPreview ? "预览" : ""}>
-        <div class="wrapper">
-          <div class="title">
-            {questionnaire.title}
+      <Card
+        class="preview-area"
+        title={isPreview ? "预览" : ""}
+        bodyStyle={isPreview ? {} : { padding: 0 }}
+        bordered={isPreview}
+      >
+        <div
+          class="preview-wrapper"
+          style={
+            isPreview
+              ? {}
+              : {
+                  boxShadow: " 0px 1px 6px 0px rgba(205, 220, 245, 1)",
+                  padding: "0 24px 70px",
+                }
+          }
+        >
+          <div class="title" style={isPreview ? {} : { paddingTop: "40px" }}>
+            <span
+              style={[
+                { color: "#5A83E5", fontSize: "24px", fontWeight: "bold" },
+              ]}
+            >
+              {questionnaire.title}
+            </span>
             {!isPreview &&
               status !== STATUS.IN_PROGRESS &&
               (() => {
@@ -103,7 +137,7 @@ export default {
             }
           })}
 
-          {!isPreview ? (
+          {!isPreview && !this.forceDisabled ? (
             <Button
               class="btn-submit"
               type={"primary"}
@@ -135,9 +169,9 @@ export default {
 <style lang="scss" scoped>
 .preview-area {
   width: 800px;
-  height: 1000px;
+  min-height: 1000px;
 
-  .wrapper {
+  .preview-wrapper {
     display: flex;
     flex-direction: column;
 

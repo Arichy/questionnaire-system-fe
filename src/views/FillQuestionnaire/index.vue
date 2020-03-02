@@ -109,30 +109,44 @@ export default {
   render(h) {
     const { status, isLoading, exists } = this;
     return (
-      <Spin spinning={isLoading} size={"large"}>
-        <div class="wrapper">
-          {exists ? (
-            <Preview
-              isPreview={false}
-              questionnaire={this.questionnaire}
-              onSubmit={this.handleSubmit}
-              errQuestionIdArr={this.errQuestionIdArr}
-              status={status}
-            />
-          ) : (
-            <div>问卷不存在</div>
-          )}
-        </div>
-      </Spin>
+      <div class="container">
+        <Spin spinning={isLoading} size={"large"}>
+          <div class="wrapper">
+            {exists ? (
+              <Preview
+                isPreview={false}
+                questionnaire={this.questionnaire}
+                onSubmit={this.handleSubmit}
+                errQuestionIdArr={this.errQuestionIdArr}
+                status={status}
+              />
+            ) : (
+              <div>问卷不存在</div>
+            )}
+          </div>
+        </Spin>
+      </div>
     );
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  display: flex;
-  justify-content: center;
-  min-height: 100%;
+.container {
+  background-image: url("./bg.jpg");
+  background-repeat: repeat-x;
+  background-size: 1px 300px;
+  background-color: #f3f6fa;
+  padding-bottom: 30px;
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    min-height: 100%;
+
+    padding-top: 120px;
+    background: url("./banner.jpg") no-repeat top center;
+    background-size: 800px 144px;
+  }
 }
 </style>

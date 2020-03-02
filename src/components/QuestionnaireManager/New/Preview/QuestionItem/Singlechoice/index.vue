@@ -1,7 +1,9 @@
 <template>
   <div class="wrapper">
     <div class="question">
-      <span>{{ index + 1 }}. {{ question.question_name }}</span>
+      <span class="title ant-form-item-required"
+        >{{ index + 1 }}. {{ question.question_name }}</span
+      >
 
       <Alert
         type="error"
@@ -17,6 +19,7 @@
         :value="value"
         @change="handleChange"
         :disabled="forceDisable || status !== 1"
+        class="radio-group"
       >
         <Radio
           v-for="option of question.options"
@@ -67,15 +70,27 @@ export default {
     color: #444;
     font-size: 20px;
     padding: 10px;
+
+    .title {
+      font-size: 15px;
+      color: #444;
+      font-weight: bold;
+    }
   }
 
   .options {
-    color: #666;
+    color: #333;
+    font-size: 15px;
     margin-left: 30px;
     margin-top: 20px;
 
-    .option {
-      margin-bottom: 10px;
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+
+      .option {
+        margin-bottom: 10px;
+      }
     }
   }
 }

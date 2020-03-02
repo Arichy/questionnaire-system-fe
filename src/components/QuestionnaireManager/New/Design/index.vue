@@ -27,6 +27,7 @@
       :columns="columns"
       bordered
       :scroll="{ x: '100%' }"
+      :pagination="false"
     />
 
     <Button
@@ -137,13 +138,18 @@ export default {
           dataIndex: "options",
           customRender: (value, record, index) => {
             return (
-              <div style={{ width: "300px", whiteSpace: "normal" }}>
+              <div
+                style={{
+                  whiteSpace: "normal",
+                }}
+              >
                 {value.map(option => (
                   <Tag
                     key={option}
                     closable
                     onClose={() => this.handleClose(option, index)}
                     color="blue"
+                    style={{ marginBottom: "10px" }}
                   >
                     {option}
                   </Tag>
@@ -292,7 +298,7 @@ export default {
 .design-area {
   // width: 1300px;
   width: 800px;
-  height: 1000px;
+  min-height: 1000px;
 
   .select {
     width: 150px;
@@ -311,6 +317,10 @@ export default {
     td {
       white-space: nowrap;
     }
+  }
+
+  .btn-submit {
+    margin-top: 30px;
   }
 }
 </style>

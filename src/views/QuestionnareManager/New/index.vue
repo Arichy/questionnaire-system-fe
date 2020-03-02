@@ -38,7 +38,12 @@ export default {
   },
   data() {
     return {
-      questionnare: { title: "", startTime: 0, endTime: 0, questionArr: [] },
+      questionnare: {
+        title: "",
+        startTime: 0,
+        endTime: 0,
+        questionArr: [],
+      },
     };
   },
 
@@ -79,9 +84,12 @@ export default {
     async postQuestionnaire() {
       const { questionnare } = this;
 
+      if (!questionnare.startTime || !questionnare.endTime) {
+        return message.error("请选择开始时间和结束时间");
+      }
+
       try {
-        // const res = await IO.postQuestionnare(questionnare);
-        const res = { success: true, msg: "成功发布问卷" };
+        const res = await IO.postQuestionnare(questionnare);
 
         if (res.success) {
           message.success(res.msg);
@@ -112,6 +120,8 @@ export default {
 
   .wrapper {
     display: flex;
+    align-items: flex-start;
+    padding-right: 20px;
   }
 }
 </style>

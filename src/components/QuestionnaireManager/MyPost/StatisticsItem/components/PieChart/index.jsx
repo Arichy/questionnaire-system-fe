@@ -37,8 +37,7 @@ export default class PieChart extends Vue {
             emphasis: {
               show: true,
               textStyle: {
-                fontSize: "30",
-                fontWeight: "bold",
+                fontSize: "15",
               },
             },
           },
