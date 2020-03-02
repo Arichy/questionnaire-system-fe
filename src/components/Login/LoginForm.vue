@@ -16,7 +16,6 @@
                 message: '用户名不少于4位，不超过20位',
               },
             ],
-            initialValue: 'Arichy',
           },
         ]"
       />
@@ -40,7 +39,6 @@
                 message: '邮箱不超过20位',
               },
             ],
-            initialValue: '452609128@qq.com',
           },
         ]"
       />
@@ -62,7 +60,6 @@
                 message: '密码不少于6位，不超过18位',
               },
             ],
-            initialValue: '123456',
           },
         ]"
         type="password"

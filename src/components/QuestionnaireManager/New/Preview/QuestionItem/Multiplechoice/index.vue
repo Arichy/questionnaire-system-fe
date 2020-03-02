@@ -25,7 +25,10 @@ export default {
     return (
       <div class="wrapper">
         <div class="question">
-          {index + 1}. {question.question_name}
+          <span class="title ant-form-item-required">
+            {index + 1}. {question.question_name}
+          </span>
+
           <span class="option-max-num">
             （最多可选
             {question.option_max_num}项）
@@ -60,8 +63,14 @@ export default {
     font-size: 20px;
     padding: 10px;
 
+    .title {
+      font-size: 15px;
+      color: #444;
+      font-weight: bold;
+    }
+
     .option-max-num {
-      color: gray;
+      color: #666;
       font-size: 15px;
     }
   }
