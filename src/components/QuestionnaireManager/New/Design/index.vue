@@ -16,7 +16,7 @@
           :locale="zh_CN"
           :format="'YYYY-MM-DD HH:mm'"
           :showTime="{ format: 'HH:mm' }"
-          @change="handleRangePickerChange"
+          @ok="handleRangePickerChange"
         />
       </div>
     </div>

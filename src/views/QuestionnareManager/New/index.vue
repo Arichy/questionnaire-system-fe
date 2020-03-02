@@ -71,6 +71,7 @@ export default {
     },
     handleRangePickerChange({ dates }) {
       let [startTime, endTime] = dates;
+
       if (startTime) {
         startTime = startTime.valueOf();
         this.questionnare.startTime = startTime;
@@ -83,9 +84,25 @@ export default {
     },
     async postQuestionnaire() {
       const { questionnare } = this;
+      if (!questionnare.title) {
+        return message.error("请输入问卷标题");
+      }
+
+      if (questionnare.questionArr.length <= 0) {
+        return message.error("请添加至少一个问题");
+      }
 
       if (!questionnare.startTime || !questionnare.endTime) {
         return message.error("请选择开始时间和结束时间");
+      }
+
+      for (const item of questionnare.questionArr) {
+        if (!item.question_name) {
+          return message.error("题目不能为空");
+        }
+        if (item.options.length <= 0) {
+          return message.error("选项不能为空");
+        }
       }
 
       try {
@@ -102,7 +119,6 @@ export default {
         } else {
           message.error(res.msg);
         }
-        console.log(res);
       } catch (err) {
         console.log(err);
       }
