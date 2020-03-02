@@ -15,6 +15,8 @@ import FillQuestionnaire from "@/views/FillQuestionnaire";
 
 import { get } from "lodash-es";
 
+import { message } from "ant-design-vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -94,6 +96,7 @@ router.beforeEach((to, from, next) => {
   document.title = get(to, "meta.title", defaultTitle);
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!sessionStorage.getItem("token")) {
+      message.info("请先登陆");
       next("/login");
     } else {
       next();
