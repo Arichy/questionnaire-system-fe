@@ -35,6 +35,8 @@ export default {
           data.title = data.questionnaire_name;
           data.questionArr = data.questions;
 
+          document.title = data.title || "填写问卷";
+
           this.questionnaire = data;
           this.status = status;
         } else {

@@ -13,6 +13,8 @@ import MyFill from "@/views/QuestionnareManager/MyFill";
 import UserInfo from "@/views/UserInfo";
 import FillQuestionnaire from "@/views/FillQuestionnaire";
 
+import { get } from "lodash-es";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -20,6 +22,9 @@ const routes = [
     name: "login",
     path: "/login",
     component: Login,
+    meta: {
+      title: "调查问卷系统 - 登陆",
+    },
   },
   {
     name: "index",
@@ -32,23 +37,38 @@ const routes = [
       {
         path: "all_questionnaire",
         component: AllQuestionnaire,
+        meta: {
+          title: "调查问卷系统 - 所有问卷",
+        },
       },
       {
         path: "questionnaire_manager/my_post",
         component: MyPost,
+        meta: {
+          title: "调查问卷系统 - 我发布的",
+        },
       },
       {
         path: "questionnaire_manager/my_fill",
         component: MyFill,
+        meta: {
+          title: "调查问卷系统 - 我填写的",
+        },
       },
       {
         path: "questionnaire_manager/new",
         component: New,
+        meta: {
+          title: "调查问卷系统 - 新建问卷",
+        },
       },
       {
         path: "user_info",
         component: UserInfo,
         props: true,
+        meta: {
+          title: "调查问卷系统 - 个人信息",
+        },
       },
     ],
   },
@@ -56,6 +76,9 @@ const routes = [
     name: "fill_questionnaire",
     path: "/fill_questionnaire/:questionnaire_id",
     component: FillQuestionnaire,
+    meta: {
+      title: "填写问卷",
+    },
   },
 ];
 
@@ -65,7 +88,10 @@ const router = new VueRouter({
   routes,
 });
 
+const defaultTitle = "调查问卷系统";
+
 router.beforeEach((to, from, next) => {
+  document.title = get(to, "meta.title", defaultTitle);
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!sessionStorage.getItem("token")) {
       next("/login");
