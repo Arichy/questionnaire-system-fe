@@ -3,8 +3,10 @@ import { endsWith } from "lodash-es";
 import { message } from "ant-design-vue";
 import router from "../router";
 
+import { HOST } from "@/config";
+
 const instance = axios.create({
-  baseURL: "http://127.0.0.1:7001",
+  baseURL: HOST,
   withCredentials: true,
 });
 
@@ -21,7 +23,7 @@ instance.interceptors.response.use(
     return res;
   },
   err => {
-    const { data, status } = err.response;
+    const { data, status } = err.response || {};
     if (status === 401) {
       if (endsWith(data.message, "jwt expired")) {
         message.error("登陆超时，请重新登陆");
