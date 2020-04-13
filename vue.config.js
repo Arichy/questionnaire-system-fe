@@ -25,6 +25,8 @@ module.exports = {
         vue: "Vue",
       };
     }
+    
+    config.devtool = "source-map";
   },
   chainWebpack(config) {
     config.plugin("html").tap(args => {

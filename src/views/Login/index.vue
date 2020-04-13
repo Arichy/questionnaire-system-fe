@@ -10,23 +10,24 @@
             <span @click="switchTab(TABS.SIGNUP)">Sign up</span>
           </div>
         </div>
-        <div class="form">
-          <transition
-            enter-active-class="animated fadeIn"
-            leave-active-class="animated fadeOut"
-            mode="out-in"
+        <div class="form" :style="{ width: `${formWrapperWidth}px` }">
+          <div
+            class="form-wrapper"
+            :style="{
+              left: `${activeTab === TABS.LOGIN ? 0 : -loginFormWidth - 20}px`,
+            }"
           >
             <LoginForm
-              class="duration"
-              v-if="activeTab === TABS.LOGIN"
+              class="login-form"
+              ref="loginForm"
               @submit="loginSubmit"
             />
             <SignupForm
-              class="duration"
-              v-else-if="activeTab === TABS.SIGNUP"
+              class="signup-form"
+              ref="signupForm"
               @submit="signupSubmit"
             />
-          </transition>
+          </div>
         </div>
       </div>
       <div class="right">
@@ -59,7 +60,14 @@ export default {
     return {
       TABS,
       activeTab: TABS.LOGIN,
+      loginFormWidth: 0,
+      signupFormWidth: 0,
     };
+  },
+  computed: {
+    formWrapperWidth() {
+      return Math.max(this.loginFormWidth, this.signupFormWidth);
+    },
   },
   methods: {
     switchTab(tab) {
@@ -95,6 +103,11 @@ export default {
     async signupSubmit(data) {
       this.send("signup", data);
     },
+  },
+  mounted() {
+    const { loginForm, signupForm } = this.$refs;
+    this.loginFormWidth = loginForm.$el.offsetWidth;
+    this.signupFormWidth = signupForm.$el.offsetWidth;
   },
 };
 </script>
@@ -151,6 +164,8 @@ $wrapperWidth: 1000px;
         color: rgba(205, 205, 218);
         display: flex;
         justify-content: center;
+        transition-property: font-size;
+        transition-duration: 0.1s;
         > span {
           cursor: pointer;
         }
@@ -164,8 +179,27 @@ $wrapperWidth: 1000px;
 
     .form {
       margin-top: 10px;
+      height: 100%;
       .duration {
         animation-duration: 130ms;
+      }
+      position: relative;
+      overflow: hidden;
+
+      .form-wrapper {
+        display: flex;
+        overflow: hidden;
+        position: absolute;
+        left: 0px;
+        transition-property: left;
+        transition-duration: 0.4s;
+        .login-form {
+          flex-shrink: 0;
+        }
+        .signup-form {
+          flex-shrink: 0;
+          margin-left: 20px;
+        }
       }
     }
   }
